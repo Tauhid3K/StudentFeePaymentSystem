@@ -1,0 +1,58 @@
+﻿@model List<StudentFeePaymentSystem.Models.PaymentAdminViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pending Payments</h2>
+
+<table class="payments-table">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Roll</th>
+            <th>Semester</th>
+            <th>Amount</th>
+            <th>Payment Type</th>
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Roll</td>
+                <td>@p.Semester</td>
+                <td>@p.Amount</td>
+                <td>@(string.IsNullOrEmpty(p.PaymentType) ? "Pending" : p.PaymentType)</td>
+                <td>@(string.IsNullOrEmpty(p.TransactionId) ? "Pending" : p.TransactionId)</td>
+                <td class="@p.Status.ToLower()">@p.Status</td>
+                <td>
+                    @if(p.Status == "Pending" && !string.IsNullOrEmpty(p.TransactionId))
+                    {
+                        <form asp-action="UpdateStatus" method="post" style="display:inline">
+                            <input type="hidden" name="PaymentId" value="@p.PaymentId" />
+                            <input type="hidden" name="Status" value="Approved" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                        <form asp-action="UpdateStatus" method="post" style="display:inline">
+                            <input type="hidden" name="PaymentId" value="@p.PaymentId" />
+                            <input type="hidden" name="Status" value="Rejected" />
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    }
+                    else if(p.Status != "Pending")
+                    {
+                        <span>@p.Status</span>
+                    }
+                    else
+                    {
+                        <span>Waiting for transaction ID</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+﻿@model StudentFeePaymentSystem.Models.Student
+
+@{
+    ViewData["Title"] = "Student Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Register</h2>
+
+<form asp-action="Register" method="post" novalidate>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Session" class="form-label"></label>
+        <input asp-for="Session" class="form-control" placeholder="e.g., 22-23" />
+        <span asp-validation-for="Session" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Roll" class="form-label"></label>
+        <input asp-for="Roll" class="form-control" />
+        <span asp-validation-for="Roll" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Semester" class="form-label"></label>
+        <input asp-for="Semester" class="form-control" placeholder="e.g., 2nd" />
+        <span asp-validation-for="Semester" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+
+    @if(ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

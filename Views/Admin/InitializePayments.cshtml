@@ -1,0 +1,28 @@
+﻿@model List<string>  
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Initialize Semester Payments</h2>
+
+@if (TempData["Success"] != null)
+{
+    <p style="color:green;">@TempData["Success"]</p>
+}
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;">@TempData["Error"]</p>
+}
+
+<form asp-action="InitializeSemesterPayments" method="post">
+    <label>Semester:</label>
+    <select name="semester" required>
+        <option value="">Select Semester</option>
+        @foreach (var s in Model)
+        {
+            <option value="@s">@s</option>
+        }
+    </select>
+    <button type="submit">Initialize Payments</button>
+</form>

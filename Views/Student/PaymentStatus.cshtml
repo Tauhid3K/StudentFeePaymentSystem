@@ -1,0 +1,27 @@
+﻿@model List<StudentFeePaymentSystem.Models.Payment>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment Status</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Payment Type</th>
+        <th>Transaction ID</th>
+        <th>Status</th>
+    </tr>
+
+@foreach(var p in Model)
+{
+    <tr>
+        <td>@p.Id</td>
+        <td>@p.Amount</td>
+        <td>@(p.PaymentType ?? "N/A")</td>
+        <td>@(p.TransactionId ?? "N/A")</td>
+        <td>@p.Status</td>
+    </tr>
+}
+</table>

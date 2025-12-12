@@ -1,0 +1,295 @@
+/* ===== General Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    padding: 0;
+}
+
+/* ===== Header Navigation ===== */
+header {
+    background: #007bff;
+    padding: 15px 0;
+}
+
+    header nav {
+        text-align: center;
+    }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            header nav a:hover {
+                text-decoration: underline;
+            }
+
+/* ===== Main Container ===== */
+main {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* ===== Forms ===== */
+form {
+    background: white;
+    padding: 25px;
+    width: 350px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    button:hover {
+        background: #0056c1;
+    }
+
+/* ===== Messages ===== */
+p.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ===== Home Page ===== */
+.home-container {
+    text-align: center;
+    padding: 40px;
+}
+
+    .home-container h1 {
+        font-size: 34px;
+        margin-bottom: 10px;
+    }
+
+/* =====Tables===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 10px #ccc;
+    margin-top: 20px;
+}
+
+    table th, table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    table th {
+        background: #007bff;
+        color: white;
+    }
+
+/* Payment Status Colors */
+.approved {
+    color: green;
+    font-weight: bold;
+}
+
+.pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.rejected {
+    color: red;
+    font-weight: bold;
+}
+
+/* ===== Payment Buttons ===== */
+.pay-btn {
+    padding: 8px 12px;
+    margin: 3px;
+    display: inline-block;
+    border-radius: 6px;
+    color: white;
+}
+
+.bKash {
+    background: #d61c5f;
+}
+
+.nagad {
+    background: #ff6600;
+}
+
+.dbbl {
+    background: #003366;
+}
+
+.pay-btn:hover {
+    opacity: 0.8;
+}
+
+/* ===== Dashboard ===== */
+.dashboard-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: red;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+    .logout-btn:hover {
+        background: darkred;
+    }
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: #333;
+    color: white;
+}
+.dashboard-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.payments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+    .payments-table th, .payments-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .payments-table th {
+        background: #333;
+        color: #fff;
+    }
+
+    .payments-table td.pending {
+        color: orange;
+        font-weight: bold;
+    }
+
+    .payments-table td.approved {
+        color: green;
+        font-weight: bold;
+    }
+
+    .payments-table td.rejected {
+        color: red;
+        font-weight: bold;
+    }
+
+.pay-btn {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+    .pay-btn.bKash {
+        background: #e60000;
+    }
+
+    .pay-btn.nagad {
+        background: #ff6600;
+    }
+
+    .pay-btn.dbbl {
+        background: #0066cc;
+    }
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 7px 15px;
+    background: #333;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.payments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.payments-table th, .payments-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.payments-table th {
+    background: #333;
+    color: #fff;
+}
+
+td.pending { color: orange; font-weight: bold; }
+td.approved { color: green; font-weight: bold; }
+td.rejected { color: red; font-weight: bold; }
+
+.btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.btn-success { background: green; }
+.btn-danger { background: red; }
+.btn-secondary { background: gray; }

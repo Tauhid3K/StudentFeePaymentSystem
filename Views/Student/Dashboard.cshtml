@@ -1,0 +1,98 @@
+﻿@model List<StudentFeePaymentSystem.Models.Payment>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboard-container">
+    <h2>Your Payments</h2>
+
+    @if(Model != null && Model.Count > 0)
+    {
+        <table class="payments-table">
+            <thead>
+                <tr>
+                    <th>Semester</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var p in Model)
+            {
+                <tr>
+                    <td>@p.Semester</td>
+                    <td>@p.Amount</td>
+                    <td class="@p.Status.ToLower()">@p.Status</td>
+                        <td>
+                            @if (p.Status == "Pending" && string.IsNullOrEmpty(p.TransactionId))
+                            {
+                                <!-- Student has NOT submitted the form yet -->
+                                <div>
+                                    <strong>Payment Methods</strong><br />
+                                    <p>bKash: 017XXXXXXXX</p>
+                                    <p>Nagad: 018XXXXXXXX</p>
+                                    <p>DBBL: 123456789</p>
+
+                                    <form method="post" action="/Student/SubmitTransactionId">
+                                        <input type="hidden" name="paymentId" value="@p.Id" />
+
+                                        <label>Enter Transaction ID</label>
+                                        <input type="text" name="transactionId" required />
+
+                                        <select name="paymentType">
+                                            <option value="bKash">bKash</option>
+                                            <option value="Nagad">Nagad</option>
+                                            <option value="DBBL">DBBL</option>
+                                        </select>
+
+                                        <button type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            }
+                            else if (p.Status == "Pending" && !string.IsNullOrEmpty(p.TransactionId))
+                            {
+                                <!-- Student HAS submitted, waiting for admin -->
+                                <p><strong>Waiting for admin approval...</strong></p>
+                                <p>Transaction ID: @p.TransactionId</p>
+                            }
+                            else if (p.Status == "Approved")
+                            {
+                                <p><strong>Payment Successful!</strong></p>
+                                <p>Transaction ID: @p.TransactionId</p>
+                            }
+                            else if (p.Status == "Rejected")
+                            {
+                                <div>
+                                    <p><strong>Invalid Transaction!</strong></p>
+                                    <p>Please submit a new transaction ID:</p>
+
+                                    <form method="post" action="/Student/SubmitTransactionId">
+                                        <input type="hidden" name="paymentId" value="@p.Id" />
+
+                                        <label>Enter New Transaction ID</label>
+                                        <input type="text" name="transactionId" required />
+
+                                        <select name="paymentType">
+                                            <option value="bKash">bKash</option>
+                                            <option value="Nagad">Nagad</option>
+                                            <option value="DBBL">DBBL</option>
+                                        </select>
+
+                                        <button type="submit">Resubmit</button>
+                                    </form>
+                                </div>
+                            }
+
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No payments found.</p>
+    }
+</div>

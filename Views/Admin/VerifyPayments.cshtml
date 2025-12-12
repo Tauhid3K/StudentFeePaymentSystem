@@ -1,0 +1,133 @@
+﻿@model List<StudentFeePaymentSystem.Models.PaymentAdminViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Student Payments</h2>
+
+<table class="payments-table">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Roll</th>
+            <th>Semester</th>
+            <th>Amount</th>
+            <th>Payment Type</th>
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Roll</td>
+                <td>@p.Semester</td>
+                <td>
+                    <form asp-action="UpdateAmount" method="post" class="amount-form">
+                        <input type="hidden" name="PaymentId" value="@p.PaymentId" />
+                        <input type="number" name="Amount" value="@p.Amount" class="amount-input" />
+                        <button type="submit" class="btn btn-secondary">Update</button>
+                    </form>
+                </td>
+                <td>@(!string.IsNullOrEmpty(p.PaymentType) ? p.PaymentType : "Waiting")</td>
+                <td>@(!string.IsNullOrEmpty(p.TransactionId) ? p.TransactionId : "Waiting")</td>
+                <td class="@p.Status.ToLower()">@p.Status</td>
+                <td class="action-buttons">
+                    @if (p.Status == "Pending" && !string.IsNullOrEmpty(p.TransactionId))
+                    {
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="PaymentId" value="@p.PaymentId" />
+                            <input type="hidden" name="Status" value="Approved" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="PaymentId" value="@p.PaymentId" />
+                            <input type="hidden" name="Status" value="Rejected" />
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    }
+                    else if (string.IsNullOrEmpty(p.TransactionId))
+                    {
+                        <span>Waiting for transaction ID</span>
+                    }
+                    else
+                    {
+                        <span>@p.Status</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Logout" class="btn btn-secondary logout-btn">Logout</a>
+
+<style>
+    .payments-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    .payments-table th, .payments-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .payments-table th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    td.pending { color: orange; font-weight: bold; }
+    td.approved { color: green; font-weight: bold; }
+    td.rejected { color: red; font-weight: bold; }
+
+    .btn {
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .btn-success { background-color: #28a745; }
+    .btn-danger { background-color: #dc3545; }
+    .btn-secondary { background-color: #6c757d; }
+
+    .amount-form {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+    .amount-input {
+        width: 70px;
+        padding: 3px;
+        text-align: center;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .logout-btn {
+        margin-top: 15px;
+        display: inline-block;
+    }
+
+    media (max-width: 768px) {
+        .amount-form, .action-buttons {
+            flex-direction: column;
+        }
+        .amount-input {
+            width: 100%;
+        }
+    }
+</style>

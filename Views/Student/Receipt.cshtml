@@ -1,0 +1,14 @@
+﻿@model StudentFeePaymentSystem.Models.Payment
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment Receipt</h2>
+
+<p><strong>Payment ID:</strong> @Model.Id</p>
+<p><strong>Amount:</strong> @Model.Amount</p>
+<p><strong>Payment Type:</strong> @(Model.PaymentType ?? "N/A")</p>
+<p><strong>Transaction ID:</strong> @(Model.TransactionId ?? "N/A")</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<a asp-action="Dashboard">Back to Dashboard</a>

@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Login";
+}
+
+<h2 class="mb-4">Admin Login</h2>
+
+<form asp-action="Login" method="post" class="p-3 border rounded bg-light" style="max-width: 400px;">
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input name="Email" type="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="Password" type="password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100">Login</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p class="text-danger mt-3">@ViewBag.Error</p>
+}

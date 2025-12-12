@@ -1,0 +1,47 @@
+﻿@model List<StudentFeePaymentSystem.Models.Fee>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Manage Fees";
+}
+
+<h2>Manage Semester Fees</h2>
+
+<!-- Add New Semester Fee -->
+<form asp-action="AddFee" method="post" class="mb-4">
+    <label>Semester:</label>
+    <input type="text" name="Semester" required placeholder="e.g. Spring 2026" />
+
+    <label>Amount:</label>
+    <input type="number" step="0.01" name="Amount" required placeholder="e.g. 5000" />
+
+    <button type="submit" class="btn btn-primary">Add / Update</button>
+</form>
+
+<!-- Existing Fees Table -->
+<table class="payments-table">
+    <thead>
+        <tr>
+            <th>Semester</th>
+            <th>Amount</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.Semester</td>
+                <td>
+                    <form asp-action="UpdateFee" method="post" style="display:flex; gap:5px; justify-content:center;">
+                        <input type="hidden" name="Id" value="@f.Id" />
+                        <input type="number" step="0.01" name="Amount" value="@f.Amount" required />
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- Optional: Add Delete button here -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
